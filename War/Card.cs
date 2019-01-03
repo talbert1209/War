@@ -8,7 +8,7 @@ namespace War
     public class Card
     {
         public string Name { get; }
-        public int Value { get; private set; }
+        public int Value { get; }
         private readonly Dictionary<int, string> _cardValueDictionary = new Dictionary<int, string>()
         {
             {1, "ace"},
