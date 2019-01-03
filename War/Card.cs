@@ -8,7 +8,8 @@ namespace War
     public class Card
     {
         public string Name { get; }
-        private readonly Dictionary<int, string> cardValueDictionary = new Dictionary<int, string>()
+        public int Value { get; private set; }
+        private readonly Dictionary<int, string> _cardValueDictionary = new Dictionary<int, string>()
         {
             {1, "ace"},
             {2, "two"},
@@ -24,7 +25,7 @@ namespace War
             {12, "queen"},
             {13, "king"},
         };
-        private readonly Dictionary<int, string> suitDictionary = new Dictionary<int, string>()
+        private readonly Dictionary<int, string> _suitDictionary = new Dictionary<int, string>()
         {
             {1, "clubs"},
             {2, "hearts"},
@@ -33,7 +34,8 @@ namespace War
         };
         public Card(int suit, int value)
         {
-            Name = $"{cardValueDictionary[value]} of {suitDictionary[suit]}";
+            Name = $"{_cardValueDictionary[value]} of {_suitDictionary[suit]}";
+            Value = value;
         }
     }
 }
