@@ -41,6 +41,11 @@ namespace War
             return player.PlayCard();
         }
 
+        public List<Card> PlayCards(Player player, int amountOfCards)
+        {
+            return player.PlayCard(amountOfCards);
+        }
+
         public void Play()
         {
             _label.Text += "<h3>Begin Battle...</h3>";
@@ -50,15 +55,38 @@ namespace War
                 var player1Card = PlayCard(_player1);
                 var player2Card = PlayCard(_player2);
 
-                _label.Text += $"Player 1 card:{player1Card.Name} vs Player 2 card: {player2Card.Name}</br>";
+                _label.Text += $"Battle Cards: {player1Card.Name} vs {player2Card.Name}</br>";
+                _label.Text += $"{GetBounty(player1Card, player2Card)}";
 
                 if (player1Card.Value > player2Card.Value)
-                    _label.Text += $"&nbsp;&nbsp;&nbsp;{player1Card.Name} is greater than {player2Card.Name} player 1 wins</br>";
+                    _label.Text += "<b>Player 1 Wins!</b></br>";
                 else if (player2Card.Value > player1Card.Value)
-                    _label.Text += $"&nbsp;&nbsp;&nbsp;{player2Card.Name} is greater than {player1Card.Name} player 2 wins</br>";
+                    _label.Text += "<b>Player 2 Wins</b></br>";
                 else
-                    _label.Text += $"&nbsp;&nbsp;&nbsp;{player1Card.Name} and {player2Card.Name} are equal y'all tie.</br>";
+                    _label.Text += "<b>y'all tie</b></br>";
             }
+        }
+
+        private string GetBounty(Card player1Card, Card player2Card)
+        {
+            List<Card> bountyCards = new List<Card>();
+            var bountyString = "Bounty...</br>";
+            if (player1Card == player2Card)
+            {
+                bountyCards.AddRange(PlayCards(_player1, 3));
+                bountyCards.AddRange(PlayCards(_player2, 3));
+
+                foreach (var card in bountyCards)
+                {
+                    bountyString += $"&nbsp;&nbsp;&nbsp;{card.Name}</br>";
+                }
+
+                return bountyString;
+            }
+
+            bountyString += $"&nbsp;&nbsp;&nbsp;{player1Card.Name}</br>" +
+                            $"&nbsp;&nbsp;&nbsp;{player2Card.Name}</br>";
+            return bountyString;
         }
     }
 }

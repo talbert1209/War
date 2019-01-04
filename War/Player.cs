@@ -26,5 +26,16 @@ namespace War
         {
             return _hand.Deal();
         }
+
+        public List<Card> PlayCard(int cardsToGet)
+        {
+            List<Card> cards = new List<Card>();
+            for (int i = 0; i < cardsToGet; i++)
+            {
+                cards.Add(_hand.Deal());
+            }
+
+            return cards;
+        }
     }
 }
