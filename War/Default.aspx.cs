@@ -17,13 +17,7 @@ namespace War
 
         protected void drawButton_Click(object sender, EventArgs e)
         {
-            var cardCount = 1;
-            Deck fullDeck = new Deck();
-            foreach (var card in fullDeck.Cards)
-            {
-                resultLabel.Text += $"{cardCount}. {card.Name.ToUpper()}</br>";
-                cardCount++;
-            } 
+            Game game = new Game(resultLabel);
         }
     }
 }
