@@ -50,7 +50,7 @@ namespace War
         {
             _label.Text += "<h3>Begin Battle...</h3>";
 
-            for (int i = 0; i < 6; i++)
+            for (int i = 0; i < 15; i++)
             {
                 var player1Card = PlayCard(_player1);
                 var player2Card = PlayCard(_player2);
@@ -71,8 +71,10 @@ namespace War
         {
             List<Card> bountyCards = new List<Card>();
             var bountyString = "Bounty...</br>";
-            if (player1Card == player2Card)
+            if (player1Card.Value == player2Card.Value)
             {
+                bountyString += $"&nbsp;&nbsp;&nbsp;{player1Card.Name}</br>" +
+                                $"&nbsp;&nbsp;&nbsp;{player2Card.Name}</br>";
                 bountyCards.AddRange(PlayCards(_player1, 3));
                 bountyCards.AddRange(PlayCards(_player2, 3));
 
