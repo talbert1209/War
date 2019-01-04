@@ -43,7 +43,22 @@ namespace War
 
         public void Play()
         {
+            _label.Text += "<h3>Begin Battle...</h3>";
 
+            for (int i = 0; i < 6; i++)
+            {
+                var player1Card = PlayCard(_player1);
+                var player2Card = PlayCard(_player2);
+
+                _label.Text += $"Player 1 card:{player1Card.Name} vs Player 2 card: {player2Card.Name}</br>";
+
+                if (player1Card.Value > player2Card.Value)
+                    _label.Text += $"&nbsp;&nbsp;&nbsp;{player1Card.Name} is greater than {player2Card.Name} player 1 wins</br>";
+                else if (player2Card.Value > player1Card.Value)
+                    _label.Text += $"&nbsp;&nbsp;&nbsp;{player2Card.Name} is greater than {player1Card.Name} player 2 wins</br>";
+                else
+                    _label.Text += $"&nbsp;&nbsp;&nbsp;{player1Card.Name} and {player2Card.Name} are equal y'all tie.</br>";
+            }
         }
     }
 }

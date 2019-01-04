@@ -18,6 +18,7 @@ namespace War
         protected void drawButton_Click(object sender, EventArgs e)
         {
             Game game = new Game(resultLabel);
+            game.Play();
         }
     }
 }
