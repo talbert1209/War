@@ -11,6 +11,8 @@ namespace War
             get { return _hand.Count; }
         }
 
+        public int BountyCount { get; private set; }
+
         public Player()
         {
             _hand = new Deck(new List<Card>());
@@ -36,6 +38,11 @@ namespace War
             }
 
             return cards;
+        }
+
+        public void AddToBountyCount(int bountiesToAdd)
+        {
+            BountyCount += bountiesToAdd;
         }
     }
 }

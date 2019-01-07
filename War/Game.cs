@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Web.UI.WebControls;
 
 namespace War
@@ -50,45 +51,74 @@ namespace War
         {
             _label.Text += "<h3>Begin Battle...</h3>";
 
-            for (int i = 0; i < 15; i++)
+            for (int i = 0; i < 20; i++)
             {
-                var player1Card = PlayCard(_player1);
-                var player2Card = PlayCard(_player2);
+                Battle battle = new Battle(_player1, _player2, _label);
 
-                _label.Text += $"Battle Cards: {player1Card.Name} vs {player2Card.Name}</br>";
-                _label.Text += $"{GetBounty(player1Card, player2Card)}";
 
-                if (player1Card.Value > player2Card.Value)
-                    _label.Text += "<b>Player 1 Wins!</b></br>";
-                else if (player2Card.Value > player1Card.Value)
-                    _label.Text += "<b>Player 2 Wins</b></br>";
-                else
-                    _label.Text += "<b>y'all tie</b></br>";
+
+
+
+                //var player1Card = PlayCard(_player1);
+                //var player2Card = PlayCard(_player2);
+                //List<Card> bounty = new List<Card>(){player1Card, player2Card};
+
+                //if (player1Card.Value > player2Card.Value)
+                //{
+                //    _label.Text += $"Battle Cards: {player1Card.Name} vs {player2Card.Name}</br>";
+                //    _label.Text += $"{GetBounty(bounty)}";
+                //    _label.Text += "<b>Player 1 Wins!</b></br>";
+                //}
+                //else if (player2Card.Value > player1Card.Value)
+                //{
+                //    _label.Text += $"Battle Cards: {player1Card.Name} vs {player2Card.Name}</br>";
+                //    _label.Text += $"{GetBounty(bounty)}";
+                //    _label.Text += "<b>Player 2 Wins</b></br>";
+                //}
+                //else
+                //{
+                //    _label.Text += $"Battle Cards: {player1Card.Name} vs {player2Card.Name}</br>";
+                //    bounty.AddRange(GetWarBounty());
+                //    War(player1Card, player2Card);
+                    
+                //    _label.Text += "<b>y'all tie</b></br>";
+                //}
             }
         }
 
-        private string GetBounty(Card player1Card, Card player2Card)
+        private string GetBounty(List<Card> bountyCards)
         {
-            List<Card> bountyCards = new List<Card>();
             var bountyString = "Bounty...</br>";
-            if (player1Card.Value == player2Card.Value)
+            foreach (var card in bountyCards)
             {
-                bountyString += $"&nbsp;&nbsp;&nbsp;{player1Card.Name}</br>" +
-                                $"&nbsp;&nbsp;&nbsp;{player2Card.Name}</br>";
-                bountyCards.AddRange(PlayCards(_player1, 3));
-                bountyCards.AddRange(PlayCards(_player2, 3));
-
-                foreach (var card in bountyCards)
-                {
-                    bountyString += $"&nbsp;&nbsp;&nbsp;{card.Name}</br>";
-                }
-
-                return bountyString;
+                bountyString += $"&nbsp;&nbsp;&nbsp;{card.Name}</br>";
             }
 
-            bountyString += $"&nbsp;&nbsp;&nbsp;{player1Card.Name}</br>" +
-                            $"&nbsp;&nbsp;&nbsp;{player2Card.Name}</br>";
             return bountyString;
         }
+
+        private void War(Card player1Card, Card player2Card)
+        {
+            List<Card> bountyCards = new List<Card>(){player1Card, player2Card};
+            Card player1Burn1 = _player1.PlayCard();
+            Card player2Burn1 = _player2.PlayCard();
+            Card player1Burn2 = _player1.PlayCard();
+            Card player2Burn2 = _player2.PlayCard();
+            Card player1BattleCard = _player1.PlayCard();
+            Card player2BattleCard = _player2.PlayCard();
+
+            _label.Text += "********WAR********</br>";
+
+
+        }
+
+        private List<Card> GetWarBounty()
+        {
+            List<Card> warBounty = new List<Card>();
+            warBounty.AddRange(PlayCards(_player1, 2));
+            warBounty.AddRange(PlayCards(_player2, 2));
+            return warBounty;
+        }
+       
     }
 }
